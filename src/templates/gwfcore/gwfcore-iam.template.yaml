@@ -96,7 +96,20 @@ Resources:
                   - !Join ["", ["arn:aws:s3:::", !Ref S3BucketName, "/*"]]
                 Action:
                   - "s3:*"
- 
+              - Sid: S3BucketAllowReadAccessOnExternalBucketObjects
+                Effect: Allow
+                Resource:
+                  - "arn:aws:s3:::*/*"
+                Action:
+                  - "s3:GetObject"
+                  - "s3:GetObjectAcl"
+              - Sid: S3BucketAllowReadAccessOnExternalBucket
+                Effect: Allow
+                Resource:
+                  - "arn:aws:s3:::*"
+                Action:
+                  - "s3:ListBucket"
+
         # required for amazon-ebs-autoscale to resize filesystems
         - PolicyName: !Sub Autoscale-EBS-${AWS::Region}
           PolicyDocument:
