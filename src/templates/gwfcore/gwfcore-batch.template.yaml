@@ -166,18 +166,12 @@ Resources:
           - c5.4xlarge
           - m5.4xlarge
           - r5.4xlarge
-          - c5n.large
-          - m5n.large
-          - r5n.large
-          - c5n.xlarge
-          - m5n.xlarge
-          - r5n.xlarge
-          - c5n.2xlarge
-          - m5n.2xlarge
-          - r5n.2xlarge
-          - c5n.4xlarge
-          - m5n.4xlarge
-          - r5n.4xlarge
+          - c5.9xlarge
+          - m5.8xlarge
+          - r5.8xlarge
+          - c5.12xlarge
+          - m5.12xlarge
+          - r5.12xlarge
         MinvCpus: !Ref DefaultCEMinvCpus
         MaxvCpus: !Ref DefaultCEMaxvCpus
         SecurityGroupIds:
@@ -216,18 +210,12 @@ Resources:
           - c5.4xlarge
           - m5.4xlarge
           - r5.4xlarge
-          - c5n.large
-          - m5n.large
-          - r5n.large
-          - c5n.xlarge
-          - m5n.xlarge
-          - r5n.xlarge
-          - c5n.2xlarge
-          - m5n.2xlarge
-          - r5n.2xlarge
-          - c5n.4xlarge
-          - m5n.4xlarge
-          - r5n.4xlarge
+          - c5.9xlarge
+          - m5.8xlarge
+          - r5.8xlarge
+          - c5.12xlarge
+          - m5.12xlarge
+          - r5.12xlarge
         MinvCpus: !Ref PriorityCEMinvCpus
         MaxvCpus: !Ref PriorityCEMaxvCpus
         SecurityGroupIds:

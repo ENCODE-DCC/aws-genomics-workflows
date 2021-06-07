@@ -480,7 +480,14 @@ Resources:
         MountPoints:
           - ContainerPath: /opt/aws-cli
             SourceVolume: awscli
-      
+        Ulimits:
+          - HardLimit: 4096
+            Name: nofile
+            # to workaround samtools issue (too many temp files)
+            # https://github.com/samtools/samtools/issues/603
+            # ubuntu default is 1024
+            SoftLimit: 4096
+
 Outputs:  
   CodeBuildProject:
     Value: !GetAtt CodeBuildProject.Arn

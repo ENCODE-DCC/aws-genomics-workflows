@@ -33,6 +33,19 @@ Resources:
                 Resource: !Join ["", ["arn:aws:s3:::", !Ref S3BucketName, "/*"]]
                 Action:
                   - "s3:*"
+        - PolicyName: !Sub SecretManager-Access-${AWS::Region}
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:cromwell/credentials/*
+              - Effect: Allow
+                Action:
+                  - secretsmanager:ListSecrets
+                Resource: "*"
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -83,7 +96,20 @@ Resources:
                   - !Join ["", ["arn:aws:s3:::", !Ref S3BucketName, "/*"]]
                 Action:
                   - "s3:*"
- 
+              - Sid: S3BucketAllowReadAccessOnExternalBucketObjects
+                Effect: Allow
+                Resource:
+                  - "arn:aws:s3:::*/*"
+                Action:
+                  - "s3:GetObject"
+                  - "s3:GetObjectAcl"
+              - Sid: S3BucketAllowReadAccessOnExternalBucket
+                Effect: Allow
+                Resource:
+                  - "arn:aws:s3:::*"
+                Action:
+                  - "s3:ListBucket"
+
         # required for amazon-ebs-autoscale to resize filesystems
         - PolicyName: !Sub Autoscale-EBS-${AWS::Region}
           PolicyDocument:
@@ -123,6 +149,19 @@ Resources:
               - Effect: Allow
                 Action:
                   - ssm:DescribeParameters
+                Resource: "*"
+        - PolicyName: !Sub SecretManager-Access-${AWS::Region}
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:cromwell/credentials/*
+              - Effect: Allow
+                Action:
+                  - secretsmanager:ListSecrets
                 Resource: "*"
                 
       ManagedPolicyArns:

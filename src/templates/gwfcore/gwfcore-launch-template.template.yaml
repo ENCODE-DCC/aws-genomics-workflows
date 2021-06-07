@@ -25,7 +25,7 @@ Parameters:
     Description: Name of the launch template. This will be made unique using the Stack ID.
   DockerStorageVolumeSize:
     Type: Number
-    Default: 100
+    Default: 200
     Description: The initial size of the volume Docker will use for image and metadata storage (GB)
 
 Metadata:
@@ -184,12 +184,6 @@ Resources:
                 # set environment variables for provisioning
                 - export GWFCORE_NAMESPACE=${Namespace}
                 - export INSTALLED_ARTIFACTS_S3_ROOT_URL=$(aws ssm get-parameter --name /gwfcore/${Namespace}/installed-artifacts/s3-root-url --query 'Parameter.Value' --output text)
-
-                # enable ecs spot instance draining
-                - echo ECS_ENABLE_SPOT_INSTANCE_DRAINING=true >> /etc/ecs/ecs.config
-
-                # pull docker images only if missing
-                - echo ECS_IMAGE_PULL_BEHAVIOR=prefer-cached >> /etc/ecs/ecs.config
 
                 - cd /opt
                 - aws s3 sync $INSTALLED_ARTIFACTS_S3_ROOT_URL/ecs-additions ./ecs-additions
