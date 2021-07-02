@@ -88,7 +88,7 @@ Parameters:
   DefaultCEMaxvCpus:
     Description: The maximum number of CPUs for the default Batch Compute Environment
     Type: Number
-    Default: 100
+    Default: 4000
   PriorityCEMinvCpus:
     Description: The minimum number of CPUs for the high-priority Batch Compute Environment
     Type: Number
@@ -96,7 +96,7 @@ Parameters:
   PriorityCEMaxvCpus:
     Description: The maximum number of CPUs for the high-priority Batch Compute Environment
     Type: Number
-    Default: 100
+    Default: 4000
   ArtifactBucketName:
     Type: String
     Default: caper-aws-genomics-workflows
